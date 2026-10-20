@@ -10,6 +10,15 @@
 # Removed: Ghost ball, HUD, Auto-pocket, Click-through, per-color pickers.
 
 import sys, os, json, math
+import PyQt5
+
+# Qt's default plugin lookup can lose non-ASCII parent paths on Windows.
+qt_platform_plugin_path = os.path.join(
+    os.path.dirname(PyQt5.__file__), "Qt5", "plugins", "platforms"
+)
+if os.path.isdir(qt_platform_plugin_path) and not os.environ.get("QT_QPA_PLATFORM_PLUGIN_PATH"):
+    os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = qt_platform_plugin_path
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 CONFIG_FILE = "pf_config.json"
